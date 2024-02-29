@@ -1,0 +1,48 @@
+{
+    "id": id,
+    // unique, random, int
+    "courseName": courseName,
+    // chosen by user when course is created, string
+    "authorName": authorName,
+    // same as user name of user who created the course, string
+    "dateCreated": dateCreated,
+    // date of when user created the course, dateType
+    "demoVideo": demoVideo,
+    // chosen by user when course is created, video that can be played to demonstrate the course, mp4 file
+    "demoImage": demoImage,
+    // chosen by user when course is created, image that is shown when students are searching for the course, img file (jpeg, jpg, png, etc)
+    "rating": rating,
+    // created by average rating by users, int shown in stars
+    "price": price,
+    // chosen by user when course is created, price that is shown when students are searching for the course and that user will pay for, int
+    "category": category,
+    // chosen from a list of predetermined categories by user when course is created, category that is shown when students are searching for the course, string
+    "episodes": [
+    // list of episodes in course
+        {
+            "episodeName": episodeName,
+            // chosen by user, name of the episode, string
+            "episodeNumber": episodeNumber,
+            // episode number, automatically selected by when user uploads the episode, int
+            "episodeText": episodeText
+            // chosen by user, summary of the episode, string
+            "episodeVideo": episodeVideo,
+            // chosen by user, video , mp4 file
+            "episodeImage": episodeImage,
+            // chosen by user, image shown when students have bought the course and are looking at the episodes in the course, img file (jpeg, jpg, png, etc)
+            "episodeDateCreated": dateCreated
+            // date of when the user uploaded the episode to the course, dateType
+        }
+    ]
+    "comments": [
+    // comments of the course
+        "commentAuthor": commentAuthor,
+        // username of user who uploaded the comment, string
+        "commentDateCreated": commentDate,
+        // date of when the user uploaded the comment, dateType
+        "commentText": commentText,
+        // chosen by user, summary of the comment, string
+        "commentRating": commentRating
+        // chosen by user, rating the user has given of the course, int show in stars
+    ]
+}

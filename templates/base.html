@@ -4,6 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %} {% endblock %} - HackSwift 2024</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Jquery if needed -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
     <style>
         nav a {
             color: #d64161;
@@ -14,10 +18,10 @@
     </style>
 </head>
 <body>
-    <nav>
+    <!-- <nav>
         <a href="#">Nav1</a>
         <a href="#">Nav2</a>
-    </nav>
+    </nav> -->
     <hr>
     <div class="content">
         {% block content %} {% endblock %}

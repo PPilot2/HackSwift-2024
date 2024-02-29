@@ -1,0 +1,16 @@
+<!-- nav block for the rest of the files -->
+<!-- nav will actually be collapsable sidebar -->
+{% block nav %}
+        <nav>
+            <a href="{{ url_for('dashboard') }}" class="navLink">Dashboard</a>
+            <a href="{{ url_for('createCarpool') }}" class="navLink">Carpool</a>
+            <a href="{{ url_for('about') }}" class="navLink">About</a>
+            <div class="dropdown">
+                <div class="dropdown-content">
+                    <a href="{{ url_for('logout') }}" class="navLink">Logout</a>
+                    <a href="{{ url_for('edit') }}" class="navLink">My Account</a>
+                </div>
+            </div>
+            
+        </nav>
+{% endblock %}

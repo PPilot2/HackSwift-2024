@@ -1,0 +1,17 @@
+{
+    "id": id,
+    // unique, random, int
+    "firstName": firstName,
+    // chosen by the user when creating user, string
+    "lastName": lastName,
+    // chosen by the user when creating user, string
+    "email": email,
+    // chosen by the user when creating user, string
+    "dateCreated": dateCreated,
+    // date of when user created the account, dateType
+    "ifTeacher", ifTeacher,
+    // chosen by user, whether or not account is a teacher account, boolean
+    "numberOfCourses", numberOfCourses,
+    // number of courses created by user, int
+    "userImage", userImage
+}
