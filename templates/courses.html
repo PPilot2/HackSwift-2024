@@ -1,0 +1,19 @@
+<!-- extends from base file and includes nav -->
+{% extends 'base.html' %}
+{% include 'nav.html' %}
+<title>{% block title %} - Dashboard{% endblock %}</title>
+{% block content %}
+    {% block nav%}
+    {% endblock %}
+    <h1>Create a course</h1>
+    <div class="blog-content">
+        <form method="post">
+            <label for="name">Course name</label>
+            <input name="name" id="name" type="text"></input>
+
+            <label for="summary">Short summary</label>
+            <input name="summary" id="summary" type="text"></input>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+{% endblock %}

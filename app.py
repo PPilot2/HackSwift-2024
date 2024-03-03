@@ -1,6 +1,7 @@
 # imports
 from flask import Flask, render_template, url_for, redirect, request
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import DeclarativeBase, relationship
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
@@ -29,6 +30,7 @@ def load_user(user_id):
 
 # user table for users (id, username, password, email, userPosts (int))
 class User(db.Model, UserMixin):
+    __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), nullable=False, unique=True)
     password = db.Column(db.String(80), nullable=False)
@@ -38,13 +40,24 @@ class User(db.Model, UserMixin):
     userPosts = db.Column(db.Integer, default=0)
 
 # post table for posts (id, user, date created, location, email)
-class Post(db.Model):
+class Course(db.Model):
+    __tablename__ = 'course'
     id = db.Column(db.Integer, primary_key=True)
-    user = db.Column(db.String(20), nullable=False, unique=False)
-    created = db.Column(db.String(100), nullable=False, unique=False)
-    location = db.Column(db.String(100), nullable=False, unique=False)
-    email = db.Column(db.String(100), nullable=False, unique=False)
+    courseName = db.Column(db.String(50), nullable=False)
+    authorName = db.Column(db.String(20), nullable=False, unique=False)
+    summary = db.Column(db.String(50))
+    dateCreated = db.Column(db.String(100), nullable=False, unique=False, default=datetime.datetime.now())
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user = db.relationship("User", backref=db.backref("user", uselist=False))
 
+class Chapter(db.Model):
+    __tablename__ = 'chapters'
+    id = db.Column(db.Integer, primary_key=True)
+    summaryText = db.Column(db.String(250))
+    dateCreated = db.Column(db.String(100), nullable=False, unique=False, default=datetime.datetime.now())
+    course_id = db.Column(db.Integer, db.ForeignKey('course.id'), nullable=False)
+    course = db.relationship("Course", backref=db.backref("course", uselist=False))
+    
 # class register form (takes username, password, and email parameters)
 class RegisterForm(FlaskForm):
     username = StringField(validators=[
@@ -98,13 +111,14 @@ def login():
 @app.route('/dashboard', methods=['GET', 'POST'])
 @login_required
 def dashboard():
-    posts = Post.query.all()
-    return render_template('dashboard.html', user=user, posts=posts)
+    courses = Course.query.all()
+    print(courses)
+    return render_template('dashboard.html', user=user, courses=courses)
 
 # route for 404 error handling
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template('404.html'), 404
+# @app.errorhandler(404)
+# def page_not_found(e):
+#     return render_template('404.html'), 404
 # route to logout
 @app.route('/logout', methods=['GET', 'POST'])
 @login_required
@@ -127,24 +141,6 @@ def register():
 
     return render_template('register.html', form=form)
 
-# route to create a carpool post
-@app.route('/createCarpool', methods=['GET', 'POST'])
-@login_required
-def createCarpool():
-    if request.method == 'POST':
-        location = request.form['location']
-        # creates the new post and adds to the table
-        new_post = Post(location=location, user=user.username, created=datetime.datetime.now(), email=user.email)
-        db.session.add(new_post)
-        db.session.commit()
-        user.userPosts += 1
-        db.session.add(user)
-        db.session.commit()
-
-        return redirect(url_for('dashboard'))
-
-    return render_template('createPool.html', user=user)
-
 # route to edit account information
 @app.route('/edit', methods=['GET', 'POST'])
 @login_required
@@ -162,7 +158,39 @@ def edit():
         return redirect(url_for('dashboard', user=user))
 
     return render_template('editAccount.html')
-        
+
+@app.route('/courses', methods=['GET', 'POST'])
+@login_required
+def courses():
+    if request.method == 'POST':
+        courseName = request.form['name']
+        authorName = User.username
+        summary = request.form['summary']
+
+        Course.courseName = courseName
+        Course.authorName = authorName
+        Course.summary = summary
+        db.session.commit()
+
+        return redirect(url_for('chapters', user=user))
+
+    return render_template('courses.html')
+
+@app.route('/chapters', methods=['GET', 'POST'])
+@login_required
+def chapters():
+    if request.method == 'POST':
+        chapterName = request.form['name']
+        summary = request.form['summary']
+
+        Chapter.chapterName = chapterName
+        Chapter.summary = summary
+        db.session.commit()
+
+        return redirect(url_for('dashboard', user=user))
+
+    return render_template('chapters.html')
+
 # route for about page
 @app.route('/about')
 def about():
