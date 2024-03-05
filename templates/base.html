@@ -8,20 +8,9 @@
     <!-- Jquery if needed -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
-    <style>
-        nav a {
-            color: #d64161;
-            font-size: 3em;
-            margin-left: 50px;
-            text-decoration: none;
-        }
-    </style>
 </head>
 <body>
-    <!-- <nav>
-        <a href="#">Nav1</a>
-        <a href="#">Nav2</a>
-    </nav> -->
+    {% extends 'nav.html' %}
     <hr>
     <div class="content">
         {% block content %} {% endblock %}
