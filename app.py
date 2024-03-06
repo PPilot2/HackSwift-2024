@@ -31,32 +31,33 @@ def load_user(user_id):
 # user table for users (id, username, password, email, userPosts (int))
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(20), nullable=False, unique=True)
     password = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(100), nullable=False, unique=True)
     created = db.Column(db.Date, nullable=False, default=datetime.datetime.now())
     isTeacher = db.Column(db.Boolean, nullable=False, default=False)
     userPosts = db.Column(db.Integer, default=0)
+    courses = db.relationship('Course', backref=db.backref('course'))
 
 # post table for posts (id, user, date created, location, email)
 class Course(db.Model):
     __tablename__ = 'course'
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     courseName = db.Column(db.String(50), nullable=False)
     authorName = db.Column(db.String(20), nullable=False, unique=False)
     summary = db.Column(db.String(50))
     dateCreated = db.Column(db.String(100), nullable=False, unique=False, default=datetime.datetime.now())
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    user = db.relationship("User", backref=db.backref("user", uselist=False))
+    course_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    chapters = db.relationship('Chapter', backref=db.backref('chapter'))
 
 class Chapter(db.Model):
     __tablename__ = 'chapters'
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    chapterName = db.Column(db.String(50), nullable=True)
     summaryText = db.Column(db.String(250))
     dateCreated = db.Column(db.String(100), nullable=False, unique=False, default=datetime.datetime.now())
-    course_id = db.Column(db.Integer, db.ForeignKey('course.id'), nullable=False)
-    course = db.relationship("Course", backref=db.backref("course", uselist=False))
+    chapter_id = db.Column(db.Integer, db.ForeignKey('course.id'))
     
 # class register form (takes username, password, and email parameters)
 class RegisterForm(FlaskForm):
@@ -164,12 +165,12 @@ def edit():
 def courses():
     if request.method == 'POST':
         courseName = request.form['name']
-        authorName = User.username
+        authorName = user.username
+        print(authorName)
         summary = request.form['summary']
 
-        Course.courseName = courseName
-        Course.authorName = authorName
-        Course.summary = summary
+        newCourse = Course(courseName=courseName, summary=summary, authorName=authorName)
+        db.session.add(newCourse)
         db.session.commit()
 
         return redirect(url_for('chapters', user=user))
@@ -183,8 +184,8 @@ def chapters():
         chapterName = request.form['name']
         summary = request.form['summary']
 
-        Chapter.chapterName = chapterName
-        Chapter.summary = summary
+        newChapter = Chapter(chapterName=chapterName, summaryText=summary)
+        db.session.add(newChapter)
         db.session.commit()
 
         return redirect(url_for('dashboard', user=user))
