@@ -14,18 +14,18 @@
         top:0;
         left:0;
         height:100%;
-        width: 150px;
+        width: 8%;
         background-color: #196964;
         padding: .4rem .8rem;
         transition: all 0.5s ease
     }
     .sidebar.active ~ .main-content {
-        left: 250px;
+        left: 15%;
         width:calc(100%-250px)
 
     }
     .sidebar.active {
-        width:250px;
+        width: 15%;
     }
     .sidebar #btn {
         position:absolute;
@@ -149,14 +149,14 @@
     
     <ul>
         <li>
-            <a href="#">
+            <a href="{{ url_for('dashboard') }}">
                 <i class="bx bxs-grid-alt"></i>
                 <span class="nav-item">Dashboard</span>
             </a>
             <span class="tooltip">Dashboard</span>
         </li>
         <li>
-            <a href="#">
+            <a href="{{ url_for('courses') }}">
                 <i class="bx bxs-grid-alt"></i>
                 <span class="nav-item">Courses</span>
             </a>
@@ -177,11 +177,11 @@
             <span class="tooltip">Homework</span>
         </li>
         <li>
-            <a href="#">
+            <a href="{{ url_for('edit') }}">
                 <i class="bx bxs-grid-alt"></i>
-                <span class="nav-item">Notification</span>
+                <span class="nav-item">Edit account</span>
             </a>
-            <span class="tooltip">Notification</span>
+            <span class="tooltip">Edit account</span>
         </li>
         <li>
             <a href="#">
@@ -191,7 +191,7 @@
             <span class="tooltip">Settings</span>
         </li>
         <li>
-            <a href="#">
+            <a href="{{ url_for('logout') }}">
                 <i class="bx bxs-grid-alt"></i>
                 <span class="nav-item">Logout</span>
             </a>

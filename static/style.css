@@ -53,6 +53,7 @@ nav a {
 
 nav a:hover {
   color: #000;
+  background-color: #fff;
 }
 
 nav a::before {
