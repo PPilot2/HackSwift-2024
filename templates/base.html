@@ -9,11 +9,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
+
 <body>
+<<<<<<< HEAD
     {% include 'nav.html' %}
+=======
+
+>>>>>>> c910946 (create_login)
     <hr>
+    
     <div class="content">
-        {% block content %} {% endblock %}
+        {% block content %} 
+        {% endblock %}
     </div>
+    {% extends 'nav.html' %}
+
 </body>
 </html>

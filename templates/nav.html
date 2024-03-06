@@ -1,6 +1,5 @@
 <!-- nav block for the rest of the files -->
 <!-- nav will actually be collapsable sidebar -->
-{% block nav %}
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 <style>
     * {
@@ -149,53 +148,77 @@
     
     <ul>
         <li>
+<<<<<<< HEAD
             <a href="{{ url_for('dashboard') }}">
+=======
+            <a href="/">
+>>>>>>> c910946 (create_login)
                 <i class="bx bxs-grid-alt"></i>
                 <span class="nav-item">Dashboard</span>
             </a>
             <span class="tooltip">Dashboard</span>
         </li>
         <li>
+<<<<<<< HEAD
             <a href="{{ url_for('yourCourses') }}">
+=======
+<<<<<<< HEAD
+            <a href="{{ url_for('courses') }}">
+=======
+            <a href="/courses">
+>>>>>>> c910946 (create_login)
+>>>>>>> ce63f471d8cc77f5ea6ce75fde88daf0882ea9f0
                 <i class="bx bxs-grid-alt"></i>
                 <span class="nav-item">Your Courses</span>
             </a>
             <span class="tooltip">Your Courses</span>
         </li>
         <li>
-            <a href="#">
+            <a href="/tasks">
                 <i class="bx bxs-grid-alt"></i>
                 <span class="nav-item">Tasks</span>
             </a>
             <span class="tooltip">Tasks</span>
         </li>
         <li>
-            <a href="#">
+            <a href="/homework">
                 <i class="bx bxs-grid-alt"></i>
                 <span class="nav-item">Homework</span>
             </a>
             <span class="tooltip">Homework</span>
         </li>
         <li>
+<<<<<<< HEAD
             <a href="{{ url_for('edit') }}">
                 <i class="bx bxs-grid-alt"></i>
                 <span class="nav-item">Edit account</span>
             </a>
             <span class="tooltip">Edit account</span>
+=======
+            <a href="/notifications">
+                <i class="bx bxs-grid-alt"></i>
+                <span class="nav-item">Notifications</span>
+            </a>
+            <span class="tooltip">Notifications</span>
+>>>>>>> c910946 (create_login)
         </li>
         <li>
-            <a href="#">
+            <a href="/settings">
                 <i class="bx bxs-grid-alt"></i>
                 <span class="nav-item">Settings</span>
             </a>
             <span class="tooltip">Settings</span>
         </li>
         <li>
+<<<<<<< HEAD
             <a href="{{ url_for('logout') }}">
+=======
+            <a href="{{ url_for('login') }}">
+>>>>>>> c910946 (create_login)
                 <i class="bx bxs-grid-alt"></i>
-                <span class="nav-item">Logout</span>
+                <span class="nav-item">Login</span>
             </a>
-            <span class="tooltip">Logout</span>
+            <span class="tooltip">Login</span>
         </li>
         
     </ul>
@@ -209,4 +232,3 @@
         sidebar.classList.toggle('active')
     }
 </script>
-{% endblock %}

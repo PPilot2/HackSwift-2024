@@ -3,6 +3,7 @@
 <title>{% block title %} - Home{% endblock %}</title>
 {% block content %}
     <!-- home page -->
+    <body>
     <h1>CodeX</h1>
     <div id="loginButton">
         <a href="{{ url_for('login') }}">Login</a><br>
@@ -10,4 +11,5 @@
     <div id="registerButton">
         <a href="{{ url_for('register') }}">Register</a><br>
     </div>
+</body>
 {% endblock %}
