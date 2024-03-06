@@ -5,7 +5,7 @@
 {% block content %}
     {% block nav%}
     {% endblock %}
-    <h1>Hi {{user.username}}!</h1>
+    <h1>Your courses</h1>
     <div class="blog-content">
         <a href="{{ url_for('courses') }}"><button>Create a course</button></a>
         <!-- for loop printing out posts -->
@@ -13,6 +13,9 @@
             <a href="/details?courseId={{ course['id'] }}">
                 <h2>{{ course['courseName'] }}</h2>
                 <h2>Summary: {{ course['summary'] }}</h2>
+                <a href="#">
+                    <h2>Edit Course</h2>
+                </a>
             </a>
             <hr>
         {% endfor %}

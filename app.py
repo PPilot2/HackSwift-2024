@@ -113,8 +113,23 @@ def login():
 @login_required
 def dashboard():
     courses = Course.query.all()
-    print(courses)
+    # print(courses)
     return render_template('dashboard.html', user=user, courses=courses)
+
+@app.route('/details')
+@login_required
+def courseDetails():
+    courseId = request.args.get('courseId')
+    print(courseId)
+    course = Course.query.filter(Course.id == courseId).all()
+    return render_template('courseDetails.html', course=course)
+
+@app.route('/yourCourses')
+# work in progress
+@login_required
+def yourCourses():
+    courseQuery = Course.query.filter(Course.authorName == user.username).all()
+    return render_template('yourCourses.html', courses=courseQuery)
 
 # route for 404 error handling
 # @app.errorhandler(404)

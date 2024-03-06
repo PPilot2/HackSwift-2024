@@ -1,0 +1,17 @@
+<!-- extends from base file and includes nav -->
+{% extends 'base.html' %}
+{% include 'nav.html' %}
+<title>{% block title %} - Dashboard{% endblock %}</title>
+{% block content %}
+    {% block nav %}
+    {% for course in course %}
+        <div class="blog-content">
+            <h1>{{ course['courseName'] }}</h1>
+            <h2>{{ course['summary'] }}</h2>
+            <a href="#">
+                <h3>Edit</h3>
+            </a>
+        </div>
+    {% endfor %}
+    {% endblock %}
+{% endblock %}
