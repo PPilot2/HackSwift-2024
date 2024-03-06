@@ -99,13 +99,19 @@ def home():
 def login():
     global user
     form = LoginForm()
-    if form.validate_on_submit():
+    
+    if request.method == "POST":
         # validates the form
+        print(request.data)
+
+        """
+        
         user = User.query.filter_by(username=form.username.data).first()
         if user:
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
                 return redirect(url_for('dashboard'))
+        """
     return render_template('login.html', form=form)
 
 # route to dashboard (kind of like homepage)

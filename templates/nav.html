@@ -6,7 +6,6 @@
         margin:0;
         padding: 10px;
         box-sizing:border-box;
-        font-family:Arial, Helvetica, sans-serif
     }
     .sidebar {
         position: absolute;
@@ -88,7 +87,7 @@
         position:relative;
         list-style-type:none;
         height:70px;
-        width:85%;
+        width:90%;
         margin: 0.8rem auto;
         line-height:50px;
     }
@@ -100,11 +99,20 @@
         border-radius:0.8rem
     }
     .sidebar ul li a:hover {
+        position:absolute;
+        top:0; right:0; 
+        width:60px;
+        background-color:white;
+        color:#12171e
+    }.sidebar.active ul li a:hover {
+        width:150px;
         background-color:white;
         color:#12171e
     }
     .sidebar ul li a i {
         min-width: 50px;
+        position:absolute;
+        right:5px;
         text-align:center;
         border-radius: 12px;
         line-height:50px
@@ -155,7 +163,11 @@
             <span class="tooltip">Dashboard</span>
         </li>
         <li>
+<<<<<<< HEAD
             <a href="{{ url_for('yourCourses') }}">
+=======
+            <a href="{{ url_for('courses') }}">
+>>>>>>> f8b3f4f01c0439b3d9a52beb945cd6558d996ba7
                 <i class="bx bxs-grid-alt"></i>
                 <span class="nav-item">Your Courses</span>
             </a>
@@ -178,7 +190,7 @@
         <li>
             <a href="{{ url_for('edit') }}">
                 <i class="bx bxs-grid-alt"></i>
-                <span class="nav-item">Edit account</span>
+                <span class="nav-item">Profile</span>
             </a>
             <span class="tooltip">Edit account</span>
             <a href="/notifications">
