@@ -4,11 +4,15 @@
 <title>{% block title %} - Dashboard{% endblock %}</title>
 {% block content %}
     {% block nav %}
-    {% for course in course %}
+    {% for course in courses %}
         <div class="blog-content">
             <h1>{{ course['courseName'] }}</h1>
             <h2>{{ course['summary'] }}</h2>
-            <a href="#">
+            {% for chapter in course.chapters %}
+                <h3>{{ chapter['chapterName'] }}</h3>
+                <h3>{{ chapter['summaryText'] }}</h3>
+            {% endfor %}
+            <a href="/editCourse?courseId={{ course['id']}}">
                 <h3>Edit</h3>
             </a>
         </div>

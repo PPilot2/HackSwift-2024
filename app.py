@@ -38,7 +38,7 @@ class User(db.Model, UserMixin):
     created = db.Column(db.Date, nullable=False, default=datetime.datetime.now())
     isTeacher = db.Column(db.Boolean, nullable=False, default=False)
     userPosts = db.Column(db.Integer, default=0)
-    courses = db.relationship('Course', backref=db.backref('course'))
+    courses = db.relationship('Course', backref=db.backref('user'))
 
 # post table for posts (id, user, date created, location, email)
 class Course(db.Model):
@@ -48,8 +48,8 @@ class Course(db.Model):
     authorName = db.Column(db.String(20), nullable=False, unique=False)
     summary = db.Column(db.String(50))
     dateCreated = db.Column(db.String(100), nullable=False, unique=False, default=datetime.datetime.now())
-    course_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    chapters = db.relationship('Chapter', backref=db.backref('chapter'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    chapters = db.relationship('Chapter', backref=db.backref('course'))
 
 class Chapter(db.Model):
     __tablename__ = 'chapters'
@@ -57,7 +57,7 @@ class Chapter(db.Model):
     chapterName = db.Column(db.String(50), nullable=True)
     summaryText = db.Column(db.String(250))
     dateCreated = db.Column(db.String(100), nullable=False, unique=False, default=datetime.datetime.now())
-    chapter_id = db.Column(db.Integer, db.ForeignKey('course.id'))
+    course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
     
 # class register form (takes username, password, and email parameters)
 class RegisterForm(FlaskForm):
@@ -120,7 +120,6 @@ def dashboard():
 @login_required
 def courseDetails():
     courseId = request.args.get('courseId')
-    print(courseId)
     course = Course.query.filter(Course.id == courseId).all()
     return render_template('courseDetails.html', course=course)
 
@@ -128,7 +127,9 @@ def courseDetails():
 # work in progress
 @login_required
 def yourCourses():
+    print(user.username)
     courseQuery = Course.query.filter(Course.authorName == user.username).all()
+    print(courseQuery)
     return render_template('yourCourses.html', courses=courseQuery)
 
 # route for 404 error handling
@@ -178,15 +179,18 @@ def edit():
 @app.route('/courses', methods=['GET', 'POST'])
 @login_required
 def courses():
+    global newCourse
     if request.method == 'POST':
         courseName = request.form['name']
         authorName = user.username
         print(authorName)
         summary = request.form['summary']
 
-        newCourse = Course(courseName=courseName, summary=summary, authorName=authorName)
+        newCourse = Course(courseName=courseName, summary=summary, authorName=authorName, user_id=user.id)
         db.session.add(newCourse)
         db.session.commit()
+        db.session.expunge_all()
+        db.session.close()
 
         return redirect(url_for('chapters', user=user))
 
@@ -199,9 +203,11 @@ def chapters():
         chapterName = request.form['name']
         summary = request.form['summary']
 
-        newChapter = Chapter(chapterName=chapterName, summaryText=summary)
+        newChapter = Chapter(chapterName=chapterName, summaryText=summary, course_id=newCourse.id)
         db.session.add(newChapter)
         db.session.commit()
+        db.session.expunge_all()
+        db.session.close()
 
         return redirect(url_for('dashboard', user=user))
 

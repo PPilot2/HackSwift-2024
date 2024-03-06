@@ -4,20 +4,12 @@
 <title>{% block title %} - Dashboard{% endblock %}</title>
 {% block content %}
     {% block nav%}
+    {% for course in course %}
+        <div class="blog-content">
+            <h1>{{ course['courseName'] }}</h1>
+            <p>Author: {{ course['authorName'] }}</p>
+            <h2>{{ course['summary'] }}</h2>
+        </div>
+    {% endfor %}
     {% endblock %}
-    <h1>Your courses</h1>
-    <div class="blog-content">
-        <a href="{{ url_for('courses') }}"><button>Create a course</button></a>
-        <!-- for loop printing out posts -->
-        {% for course in courses %}
-            <a href="/details?courseId={{ course['id'] }}">
-                <h2>{{ course['courseName'] }}</h2>
-                <h2>Summary: {{ course['summary'] }}</h2>
-                <a href="#">
-                    <h2>Edit Course</h2>
-                </a>
-            </a>
-            <hr>
-        {% endfor %}
-    </div>
 {% endblock %}
