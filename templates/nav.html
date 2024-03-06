@@ -6,7 +6,6 @@
         margin:0;
         padding: 10px;
         box-sizing:border-box;
-        font-family:Arial, Helvetica, sans-serif
     }
     .sidebar {
         position: absolute;
@@ -88,7 +87,7 @@
         position:relative;
         list-style-type:none;
         height:70px;
-        width:85%;
+        width:90%;
         margin: 0.8rem auto;
         line-height:50px;
     }
@@ -100,11 +99,20 @@
         border-radius:0.8rem
     }
     .sidebar ul li a:hover {
+        position:absolute;
+        top:0; right:0; 
+        width:60px;
+        background-color:white;
+        color:#12171e
+    }.sidebar.active ul li a:hover {
+        width:150px;
         background-color:white;
         color:#12171e
     }
     .sidebar ul li a i {
         min-width: 50px;
+        position:absolute;
+        right:5px;
         text-align:center;
         border-radius: 12px;
         line-height:50px
@@ -148,22 +156,14 @@
     
     <ul>
         <li>
-<<<<<<< HEAD
             <a href="{{ url_for('dashboard') }}">
-=======
-            <a href="/">
->>>>>>> c910946 (create_login)
                 <i class="bx bxs-grid-alt"></i>
                 <span class="nav-item">Dashboard</span>
             </a>
             <span class="tooltip">Dashboard</span>
         </li>
         <li>
-<<<<<<< HEAD
             <a href="{{ url_for('courses') }}">
-=======
-            <a href="/courses">
->>>>>>> c910946 (create_login)
                 <i class="bx bxs-grid-alt"></i>
                 <span class="nav-item">Courses</span>
             </a>
@@ -184,19 +184,11 @@
             <span class="tooltip">Homework</span>
         </li>
         <li>
-<<<<<<< HEAD
             <a href="{{ url_for('edit') }}">
                 <i class="bx bxs-grid-alt"></i>
-                <span class="nav-item">Edit account</span>
+                <span class="nav-item">Profile</span>
             </a>
-            <span class="tooltip">Edit account</span>
-=======
-            <a href="/notifications">
-                <i class="bx bxs-grid-alt"></i>
-                <span class="nav-item">Notifications</span>
-            </a>
-            <span class="tooltip">Notifications</span>
->>>>>>> c910946 (create_login)
+            <span class="tooltip">Profile</span>
         </li>
         <li>
             <a href="/settings">
@@ -206,11 +198,7 @@
             <span class="tooltip">Settings</span>
         </li>
         <li>
-<<<<<<< HEAD
             <a href="{{ url_for('logout') }}">
-=======
-            <a href="{{ url_for('login') }}">
->>>>>>> c910946 (create_login)
                 <i class="bx bxs-grid-alt"></i>
                 <span class="nav-item">Login</span>
             </a>
