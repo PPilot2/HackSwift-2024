@@ -19,11 +19,11 @@
     }
     .sidebar.active ~ .main-content {
         left: 15%;
-        width:calc(100%-250px)
+        width:calc(100%-300px)
 
     }
     .sidebar.active {
-        width: 15%;
+        width: 300px;
     }
     .sidebar #btn {
         position:absolute;
@@ -91,6 +91,10 @@
         margin: 0.8rem auto;
         line-height:50px;
     }
+    .sidebar.active ul li a:hover{
+        width:110%
+        
+    }
     .sidebar ul li a {
         color: white;
         display:flex;
@@ -98,14 +102,19 @@
         text-decoration: none;
         border-radius:0.8rem
     }
+    .sidebar.active ul li a i {
+        font-size:20px;
+        left:120px
+    }
     .sidebar ul li a:hover {
         position:absolute;
         top:0; right:0; 
         width:60px;
         background-color:white;
         color:#12171e
-    }.sidebar.active ul li a:hover {
-        width:150px;
+    }
+    .sidebar.active ul li a:hover {
+        width:90%;
         background-color:white;
         color:#12171e
     }
@@ -113,6 +122,7 @@
         min-width: 50px;
         position:absolute;
         right:5px;
+        font-size:25px;
         text-align:center;
         border-radius: 12px;
         line-height:50px
@@ -163,56 +173,47 @@
             <span class="tooltip">Dashboard</span>
         </li>
         <li>
-<<<<<<< HEAD
             <a href="{{ url_for('yourCourses') }}">
-=======
-            <a href="{{ url_for('courses') }}">
->>>>>>> f8b3f4f01c0439b3d9a52beb945cd6558d996ba7
-                <i class="bx bxs-grid-alt"></i>
-                <span class="nav-item">Your Courses</span>
+                <i class='bx bxs-notepad'></i>
+                <span class="nav-item">Courses</span>
             </a>
-            <span class="tooltip">Your Courses</span>
+            <span class="tooltip">Courses</span>
         </li>
         <li>
             <a href="/tasks">
-                <i class="bx bxs-grid-alt"></i>
+                <i class='bx bxs-notepad' ></i>
                 <span class="nav-item">Tasks</span>
             </a>
             <span class="tooltip">Tasks</span>
         </li>
         <li>
-            <a href="/homework">
-                <i class="bx bxs-grid-alt"></i>
-                <span class="nav-item">Homework</span>
-            </a>
-            <span class="tooltip">Homework</span>
-        </li>
-        <li>
             <a href="{{ url_for('edit') }}">
-                <i class="bx bxs-grid-alt"></i>
+                <i class='bx bxs-user-circle'></i>
                 <span class="nav-item">Profile</span>
             </a>
-            <span class="tooltip">Edit account</span>
+            <span class="tooltip">Profile</span>
+
+        </li>
+        <li>
             <a href="/notifications">
-                <i class="bx bxs-grid-alt"></i>
+                <i class='bx bxs-notification' ></i>
                 <span class="nav-item">Notifications</span>
             </a>
             <span class="tooltip">Notifications</span>
         </li>
         <li>
             <a href="/settings">
-                <i class="bx bxs-grid-alt"></i>
+                <i class='bx bxs-cog' ></i>
                 <span class="nav-item">Settings</span>
             </a>
             <span class="tooltip">Settings</span>
         </li>
         <li>
             <a href="{{ url_for('logout') }}">
-            <a href="{{ url_for('login') }}">
-                <i class="bx bxs-grid-alt"></i>
-                <span class="nav-item">Login</span>
+                <i class='bx bxs-log-out' ></i>
+                <span class="nav-item">Logout</span>
             </a>
-            <span class="tooltip">Login</span>
+            <span class="tooltip">Logout</span>
         </li>
         
     </ul>
