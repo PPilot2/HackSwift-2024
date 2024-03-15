@@ -8,26 +8,16 @@
     <!-- form for login -->
     <div style="text-align: center;">
         <form action="/register" method="POST">
-        <div class="form-group" style="text-align: center; padding:20px">
-          <label for="exampleInputEmail1">Username</label>
-          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username" style="width:50%; position:absolute; left:25%">
-        </div>
+          {{form.hidden_tag()}}
+          {{form.username}}
+          {{form.password}}
+          {{form.email}}
+          {{form.submit }}
         
-        <div class="form-group" style="text-align: center; padding-bottom:40px">
-          <label for="exampleInputPassword1">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" style="width:50%; position:absolute; left:25%;">
-        </div>
-        <div class="form-group" style="text-align: center; padding-bottom:40px">
-            <label for="exampleInputEmail1">Email</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" style="width:50%; position:absolute; left:25%">
-          </div>
-        <div style="padding:10px">
-        <button type="submit" class="btn btn-primary" >Submit</button>
-      </div>
       </form>
-      <div id="signupButton">
-        <a href="{{ url_for('login') }}">Already have an account? Log In</a>
-    </div>
+</div>
+<div id="signupButton" style="text-align: center;">
+  <a href="{{ url_for('login') }}">Already have an account? Log In</a>
 </div>
 </body>
 

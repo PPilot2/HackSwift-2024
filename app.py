@@ -102,16 +102,12 @@ def login():
     
     if request.method == "POST":
         # validates the form
-        print(request.data)
-
-        """
-        
+        print(request.data)        
         user = User.query.filter_by(username=form.username.data).first()
         if user:
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
                 return redirect(url_for('dashboard'))
-        """
     return render_template('login.html', form=form)
 
 # route to dashboard (kind of like homepage)
@@ -150,7 +146,7 @@ def logout():
     return redirect(url_for('login'))
 
 # route to register
-@ app.route('/register', methods=['GET', 'POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     # creates form
     form = RegisterForm()
